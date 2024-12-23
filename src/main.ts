@@ -6,6 +6,7 @@ import express from "express";
 
 const server = express();
 let cachedApp: express.Express;
+const isServerless = process.env.AWS_LAMBDA_FUNCTION_NAME;
 
 async function bootstrap() {
   if (!cachedApp) {
@@ -13,6 +14,14 @@ async function bootstrap() {
     await app.init();
     cachedApp = app.getHttpAdapter().getInstance();
   }
+
+  if (!isServerless) {
+    const port = process.env.PORT || 3000;
+    server.listen(port, () => {
+      console.log(`🚀 Server ready at http://localhost:${port}`);
+    });
+  }
+
   return cachedApp;
 }
 
@@ -21,3 +30,5 @@ export default async function handler(req: any, res: any) {
   const app = await bootstrap();
   return app(req, res);
 }
+
+bootstrap();

@@ -168,4 +168,14 @@ export class DothService {
     await this.addMessageToDb(response, conversationId, "assistant");
     return { content: response };
   }
+
+  async getAllConversations(): Promise<AiConversation[]> {
+    return await this.aiConversationModel.find();
+  }
+
+  async deleteConversation(conversationId: string): Promise<void> {
+    console.log("🔌 <== deleteConversation");
+    console.log(conversationId);
+    await this.aiConversationModel.deleteOne({ conversationId });
+  }
 }

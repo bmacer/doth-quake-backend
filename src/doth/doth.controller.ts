@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Param, Inject } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  Inject,
+  Delete,
+} from "@nestjs/common";
 import { DothService } from "./doth.service";
 
 @Controller("doth")
@@ -7,6 +15,16 @@ export class DothController {
     @Inject(DothService)
     private readonly dothService: DothService
   ) {}
+
+  @Get("allConversations")
+  async getAllConversations() {
+    return await this.dothService.getAllConversations();
+  }
+
+  @Delete(":conversationId")
+  async deleteConversation(@Param("conversationId") conversationId: string) {
+    return await this.dothService.deleteConversation(conversationId);
+  }
 
   @Post(":conversationId")
   async postMessage(
@@ -21,6 +39,8 @@ export class DothController {
 
   @Get("history/:conversationId")
   async getHistory(@Param("conversationId") conversationId: string) {
+    console.log("🔌 <== getHistory");
+    console.log(conversationId);
     return await this.dothService.getHistoryWithoutSystemMessage(
       conversationId
     );

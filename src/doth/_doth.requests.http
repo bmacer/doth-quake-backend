@@ -1,0 +1,11 @@
+# GET /doth/:conversationId
+GET http://localhost:3000/doth/history/1
+
+# POST /doth/:conversationId
+POST http://localhost:3000/doth/1
+Content-Type: application/json
+
+{
+  "message": "Hello, how are you?"
+}
+

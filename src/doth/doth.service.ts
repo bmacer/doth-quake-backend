@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { AiConversation, AiMessage } from "./doth.model";
+import dotenv from "dotenv";
+dotenv.config();
 
 const XAI_URL = process.env.XAI_URL;
 const GITHUB_WIKI_URL = process.env.GITHUB_WIKI_URL;

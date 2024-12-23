@@ -27,8 +27,13 @@ async function bootstrap() {
 
 // Convert to serverless handler format
 export default async function handler(req: any, res: any) {
-  const app = await bootstrap();
-  return app(req, res);
+  res.status(200).send("Hello World");
 }
 
-bootstrap();
+// Convert to serverless handler format
+// export default async function handler(req: any, res: any) {
+//   const app = await bootstrap();
+//   return app(req, res);
+// }
+
+// bootstrap();
